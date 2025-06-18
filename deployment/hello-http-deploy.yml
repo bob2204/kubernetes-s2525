@@ -23,3 +23,5 @@ spec:
         envFrom:
           - configMapRef:
               name: hello-http
+          - secretRef:
+              name: hello-http
