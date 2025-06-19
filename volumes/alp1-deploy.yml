@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: alp1
+  name: alp1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alp1
+  template:
+    metadata:
+      labels:
+        app: alp1
+    spec:
+      containers:
+      - image: alpine
+        name: alpine
+        command:
+          - tail
+          - -f
+          - /dev/null
+        volumeMounts: 
+          - name: data
+            mountPath: /partage
+
+      volumes:
+        - name: data
+          hostPath:
+            path: /home/stagiaire/data
+            type: Directory
+
