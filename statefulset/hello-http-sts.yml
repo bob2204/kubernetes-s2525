@@ -6,6 +6,7 @@ metadata:
   name: hello-http
 spec:
   replicas: 3
+  serviceName: hello-http
   selector:
     matchLabels:
       app: hello-http
