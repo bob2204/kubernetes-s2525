@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  default.conf: "server {\n    listen       80;\n    listen  [::]:80;\n    server_name
+    \ localhost;\n\n    location / {\n        root   /usr/share/nginx/html;\n        index
+    \ index.html index.htm;\n    }\n   \n    error_page   500 502 503 504  /50x.html;\n
+    \   location = /50x.html {\n        root   /usr/share/nginx/html;\n    }\n\n    #
+    pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000\n    #\n    location
+    ~ \\.php$ {\n        root           html;\n        fastcgi_pass   127.0.0.1:9000;\n
+    \       fastcgi_index  index.php;\n        fastcgi_param  SCRIPT_FILENAME  /var/www/html$fastcgi_script_name;\n
+    \       include        fastcgi_params;\n    }\n}\n\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: nginx-conf
