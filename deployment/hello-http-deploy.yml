@@ -14,9 +14,22 @@ spec:
       labels:
         app: hello-http
     spec:
+      initContainers:
+        - image: busybox:1.28
+          name: init
+          volumeMounts:
+            - name: init
+              mountPath: /mnt
+          command:
+            - sh
+            - -c
+            - hostname > /mnt/status
       containers:
       - image: bob2606/hello-http:0.8.29
         name: hello-http
+        volumeMounts:
+          - name: init
+            mountPath: /var/lib/hello-http
         ports:
           - name: helloport
             containerPort: 80
@@ -37,3 +50,8 @@ spec:
             port: 80
           periodSeconds: 20
           failureThreshold: 2 
+
+      volumes:
+        - name: init
+          emptyDir:
+            medium: Memory
